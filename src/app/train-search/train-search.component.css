@@ -1,0 +1,88 @@
+
+.train-search-container {
+  max-width: 1000px;
+  text-align: center;
+  margin: auto;
+  padding: 20px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333; 
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  font-weight: bold;
+  color: #333; 
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.form-group input {
+  width: 48%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
+}
+
+.btn {
+  width: 200px; 
+  padding: 12px;
+  background-color: #0056b3;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  display: block; 
+  margin: 0 auto; 
+}
+
+.btn:disabled {
+  background-color: #cccccc;
+}
+
+.btn:hover {
+  background-color: #007bff;
+}
+
+.table {
+  color: #000;
+  margin-top: 20px;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #000;
+}
+
+.alert {
+  margin-top: 20px;
+  font-size: 14px;
+  padding: 10px;
+  background-color: #f8d7da;
+  color: #721c24;
+  border-radius: 4px;
+}

@@ -1,0 +1,90 @@
+<div class="train-search-container">
+  <h2>Search Trains</h2>
+
+  <form [formGroup]="trainSearchForm" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+      <div class="form-group">
+        <label for="from">From Station:</label>
+        <input
+          type="text"
+          id="from"
+          formControlName="from"
+          class="form-control"
+          placeholder="Enter departure station name"
+        />
+        <div
+          *ngIf="
+            trainSearchForm.controls['from'].invalid &&
+            trainSearchForm.controls['from'].touched
+          "
+          class="error-message"
+        >
+          Please enter a valid station name.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="to">To Station:</label>
+        <input
+          type="text"
+          id="to"
+          formControlName="to"
+          class="form-control"
+          placeholder="Enter destination station name"
+        />
+        <div
+          *ngIf="
+            trainSearchForm.controls['to'].invalid &&
+            trainSearchForm.controls['to'].touched
+          "
+          class="error-message"
+        >
+          Please enter a valid station name.
+        </div>
+      </div>
+    </div>
+
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="trainSearchForm.invalid"
+    >
+      Search Trains
+    </button>
+  </form>
+
+  <div *ngIf="trains.length > 0" class="train-list">
+    <h3>Available Trains</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Train Name</th>
+          <th>Train Number</th>
+          <th>Arrival Time</th>
+          <th>Departure Time</th>
+          <th>Fare</th>
+          <th>Travel Time</th>
+          <th>Action</th>
+          <!-- New column for the "Book Now" button -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let train of trains">
+          <td>{{ train.train_name }}</td>
+          <td>{{ train.train_number }}</td>
+          <td>{{ train.arrival_time }}</td>
+          <td>{{ train.departure_time }}</td>
+          <td>{{ train.fare }}</td>
+          <td>{{ train.travel_time.hours }} hours</td>
+          <td>
+            <button class="btn btn-success">Book Now</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+</div>
