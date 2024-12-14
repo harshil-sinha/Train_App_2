@@ -16,6 +16,7 @@ export class SignupComponent {
   otpSent: boolean = false;
   otpVerified: boolean = false;
   userEmail: string = '';
+  isLoading: boolean = false;
 
   constructor(
     private http: HttpClient,
@@ -23,7 +24,6 @@ export class SignupComponent {
     private datePipe: DatePipe,
     private router: Router
   ) {
-    // Reactive form initialization with validators
     this.signupForm = this.fb.group({
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
@@ -31,7 +31,7 @@ export class SignupComponent {
       dob: ['', Validators.required],
       email: ['', []],
       password: ['', []],
-      mobile: ['', []], 
+      mobile: ['', []],
     });
 
     this.otpForm = this.fb.group({
@@ -46,16 +46,16 @@ export class SignupComponent {
 
   onSubmit() {
     if (this.signupForm.valid) {
-      let signupData = this.signupForm.value; // No need to parse it again
+      this.isLoading = true;
+      let signupData = this.signupForm.value; 
       const formattedDob = this.datePipe.transform(
         signupData.dob,
         'yyyy-MM-dd'
       );
-      signupData.dob = formattedDob; // Formatting date before submission
+      signupData.dob = formattedDob;
 
       this.userEmail = signupData.email;
 
-      // Sending signup data to backend
       this.http.post('http://localhost:4000/api/signup', signupData).subscribe({
         next: (response) => {
           Swal.fire({
@@ -64,10 +64,11 @@ export class SignupComponent {
             icon: 'success',
             confirmButtonText: 'OK',
           }).then(() => {
-            this.signupForm.reset(); // Resetting the form after success
+            this.signupForm.reset(); 
           });
 
-          this.otpSent = true; // OTP form should now be visible
+          this.otpSent = true;
+          this.isLoading = false; 
         },
         error: (error) => {
           console.error('Signup error:', error);
@@ -77,6 +78,7 @@ export class SignupComponent {
             icon: 'error',
             confirmButtonText: 'OK',
           });
+          this.isLoading = false;
         },
       });
     }
@@ -84,10 +86,10 @@ export class SignupComponent {
 
   onVerifyOTP() {
     if (this.otpForm.valid) {
-      let otpData = this.otpForm.value; // No need for JSON parsing
+      this.isLoading = true;
+      let otpData = this.otpForm.value; 
       otpData.email = this.userEmail;
 
-      // Sending OTP verification data to backend
       this.http
         .post('http://localhost:4000/api/verify_otp', otpData)
         .subscribe({
@@ -98,9 +100,10 @@ export class SignupComponent {
               icon: 'success',
               confirmButtonText: 'OK',
             }).then(() => {
-              this.otpVerified = true; // Flag to indicate OTP verified
-              this.router.navigate(['/login']); // Navigate to login page
+              this.otpVerified = true; 
+              this.router.navigate(['/login']); 
             });
+            this.isLoading = false;
           },
           error: (error) => {
             console.error('OTP verification error:', error);
@@ -110,6 +113,7 @@ export class SignupComponent {
               icon: 'error',
               confirmButtonText: 'OK',
             });
+            this.isLoading = false;
           },
         });
     }

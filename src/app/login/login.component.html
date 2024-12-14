@@ -8,8 +8,10 @@
       <div class="header">
         <h2>Login</h2>
       </div>
+      <div *ngIf="isLoading" class="loader-container">
+        <div class="loader"></div>
+      </div>
 
-      <!-- Email Input Field -->
       <div class="form-group">
         <label for="email">Email</label>
         <input
@@ -21,14 +23,16 @@
           pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$"
         />
         <span
-          *ngIf="loginForm.controls['email'].invalid && loginForm.controls['email'].touched"
+          *ngIf="
+            loginForm.controls['email'].invalid &&
+            loginForm.controls['email'].touched
+          "
           class="error-message"
         >
           Please enter a valid email address 😡
         </span>
       </div>
 
-      <!-- Password Input Field -->
       <div class="form-group">
         <label for="password">Password</label>
         <input
@@ -40,13 +44,19 @@
           required
         />
         <span
-          *ngIf="loginForm.controls['password'].hasError('required') && loginForm.controls['password'].touched"
+          *ngIf="
+            loginForm.controls['password'].hasError('required') &&
+            loginForm.controls['password'].touched
+          "
           class="error-message"
         >
           Password is required 😡
         </span>
         <span
-          *ngIf="loginForm.controls['password'].hasError('minlength') && loginForm.controls['password'].touched"
+          *ngIf="
+            loginForm.controls['password'].hasError('minlength') &&
+            loginForm.controls['password'].touched
+          "
           class="error-message"
         >
           Password must be at least 6 characters long 🤚
@@ -56,12 +66,18 @@
         </span>
       </div>
 
-      <button type="submit" [disabled]="loginForm.invalid" class="btn submit-btn">
+      <button
+        type="submit"
+        [disabled]="loginForm.invalid"
+        class="btn submit-btn"
+      >
         Login
       </button>
 
       <div class="signup-link">
-        <p>Don't have an account? <a [routerLink]="['/signup']">Sign up here</a></p>
+        <p>
+          Don't have an account? <a [routerLink]="['/signup']">Sign up here</a>
+        </p>
       </div>
     </form>
   </div>

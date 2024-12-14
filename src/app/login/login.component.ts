@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   loginForm: FormGroup;
   passwordError: boolean = false;
+  isLoading: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -32,6 +33,7 @@ export class LoginComponent {
   onSubmit(): void {
     this.passwordError = false;
     if (this.loginForm.valid) {
+      this.isLoading = true;
       const loginData = this.loginForm.getRawValue();
       this.http.post('http://localhost:4000/api/login', loginData).subscribe({
         next: (response) => {
@@ -44,6 +46,7 @@ export class LoginComponent {
             this.loginForm.reset();
             this.router.navigate(['/search']);
           });
+          this.isLoading = false; 
         },
         error: (error) => {
           if (error.status === 401) {
@@ -56,6 +59,7 @@ export class LoginComponent {
           //   icon: 'error',
           //   confirmButtonText: 'OK',
           // });
+          this.isLoading = false;
         },
       });
     } else {

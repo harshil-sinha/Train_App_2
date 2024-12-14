@@ -8,7 +8,9 @@
       <div class="header">
         <h2>Register</h2>
       </div>
-
+      <div *ngIf="isLoading" class="loader-container">
+        <div class="loader"></div>
+      </div>
       <!-- First Name -->
       <div class="form-group">
         <label for="first_name">First Name</label>
@@ -172,7 +174,7 @@
 
       <button
         type="submit"
-        [disabled]="signupForm.invalid"
+        [disabled]="signupForm.invalid || isLoading"
         class="btn submit-btn"
       >
         Sign Up
