@@ -11,6 +11,7 @@
       <div *ngIf="isLoading" class="loader-container">
         <div class="loader"></div>
       </div>
+
       <!-- First Name -->
       <div class="form-group">
         <label for="first_name">First Name</label>
@@ -52,49 +53,50 @@
         </span>
       </div>
 
-      <!-- Gender -->
-      <div class="form-group">
-        <label for="gender">Gender</label>
-        <select
-          id="gender"
-          formControlName="gender"
-          class="form-control"
-          required
-        >
-          <option value="Male">Male</option>
-          <option value="Female">Female</option>
-          <option value="Other">Other</option>
-        </select>
-        <span
-          *ngIf="
-            signupForm.controls['gender'].invalid &&
-            signupForm.controls['gender'].touched
-          "
-          class="error-message"
-        >
-          Gender is required 😡
-        </span>
-      </div>
+      <!-- Gender and Date of Birth -->
+      <div class="form-group-inline">
+        <div class="gender-container">
+          <label for="gender">Gender</label>
+          <select
+            id="gender"
+            formControlName="gender"
+            class="form-control"
+            required
+          >
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+          <span
+            *ngIf="
+              signupForm.controls['gender'].invalid &&
+              signupForm.controls['gender'].touched
+            "
+            class="error-message"
+          >
+            Gender is required 😡
+          </span>
+        </div>
 
-      <!-- Date of Birth -->
-      <div class="form-group">
-        <label for="dob">Date of Birth</label>
-        <input
-          id="dob"
-          type="date"
-          formControlName="dob"
-          class="form-control"
-          required
-        />
-        <span
-          *ngIf="
-            signupForm.controls['dob'].invalid &&
-            signupForm.controls['dob'].touched
-          "
-          class="error-message"
-        >
-          Date of Birth is required 😡
-        </span>
+        <div class="dob-container">
+          <label for="dob">Date of Birth</label>
+          <input
+            id="dob"
+            type="date"
+            formControlName="dob"
+            class="form-control"
+            required
+          />
+          <span
+            *ngIf="
+              signupForm.controls['dob'].invalid &&
+              signupForm.controls['dob'].touched
+            "
+            class="error-message"
+          >
+            Date of Birth is required 😡
+          </span>
+        </div>
       </div>
 
       <!-- Email -->
@@ -188,6 +190,7 @@
       </div>
     </form>
   </div>
+
   <!-- OTP Section -->
   <div *ngIf="otpSent && !otpVerified" class="otp-section">
     <form [formGroup]="otpForm" (ngSubmit)="onVerifyOTP()" class="otp-form">
