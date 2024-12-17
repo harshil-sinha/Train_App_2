@@ -9,7 +9,7 @@ interface Train {
   arrival_time: string;
   departure_time: string;
   fare: number;
-  travel_time: { hours: number };  
+  travel_time: { hours: number };
 }
 
 interface TrainSearchResponse {
@@ -42,18 +42,21 @@ export class TrainSearchComponent {
       const { from, to } = this.trainSearchForm.value;
 
       this.http
-        .post<TrainSearchResponse>('http://localhost:4000/api/search', { from, to })
+        .post<TrainSearchResponse>('http://localhost:4000/api/search', {
+          from,
+          to,
+        })
         .subscribe({
           next: (response) => {
             if (response.success) {
               this.trains = response.data;
               this.errorMessage = '';
-              Swal.fire({
-                title: 'Success!',
-                text: 'Trains found successfully.',
-                icon: 'success',
-                confirmButtonText: 'OK',
-              });
+              // Swal.fire({
+              //   title: 'Success!',
+              //   text: 'Trains found successfully.',
+              //   icon: 'success',
+              //   confirmButtonText: 'OK',
+              // });
             } else {
               this.errorMessage = response.message;
               this.trains = [];

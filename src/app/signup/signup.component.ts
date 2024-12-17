@@ -25,10 +25,10 @@ export class SignupComponent {
     private router: Router
   ) {
     this.signupForm = this.fb.group({
-      first_name: ['', Validators.required],
-      last_name: ['', Validators.required],
-      gender: ['', Validators.required],
-      dob: ['', Validators.required],
+      first_name: ['', []],
+      last_name: [''],
+      gender: [''],
+      dob: [''],
       email: ['', []],
       password: ['', []],
       mobile: ['', []],
@@ -47,7 +47,7 @@ export class SignupComponent {
   onSubmit() {
     if (this.signupForm.valid) {
       this.isLoading = true;
-      let signupData = this.signupForm.value; 
+      let signupData = this.signupForm.value;
       const formattedDob = this.datePipe.transform(
         signupData.dob,
         'yyyy-MM-dd'
@@ -64,11 +64,11 @@ export class SignupComponent {
             icon: 'success',
             confirmButtonText: 'OK',
           }).then(() => {
-            this.signupForm.reset(); 
+            this.signupForm.reset();
           });
 
           this.otpSent = true;
-          this.isLoading = false; 
+          this.isLoading = false;
         },
         error: (error) => {
           console.error('Signup error:', error);
@@ -87,7 +87,7 @@ export class SignupComponent {
   onVerifyOTP() {
     if (this.otpForm.valid) {
       this.isLoading = true;
-      let otpData = this.otpForm.value; 
+      let otpData = this.otpForm.value;
       otpData.email = this.userEmail;
 
       this.http
@@ -100,8 +100,8 @@ export class SignupComponent {
               icon: 'success',
               confirmButtonText: 'OK',
             }).then(() => {
-              this.otpVerified = true; 
-              this.router.navigate(['/login']); 
+              this.otpVerified = true;
+              this.router.navigate(['/login']);
             });
             this.isLoading = false;
           },

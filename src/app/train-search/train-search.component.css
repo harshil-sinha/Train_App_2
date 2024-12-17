@@ -1,59 +1,85 @@
-
+/* General Styling for Container */
 .train-search-container {
-  max-width: 1000px;
+  width: 100%;
+  max-width: 100%; /* Ensure full width on all screens */
   text-align: center;
-  margin: auto;
-  padding: 20px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
 }
 
+/* Header Styling */
 h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #333; 
+  margin-bottom: 30px;
+  color: #333;
+  font-family: "Arial", sans-serif;
+  font-size: 28px;
+  font-weight: 600;
 }
 
-.form-group {
-  margin-bottom: 15px;
-}
-
-.form-group label {
-  font-weight: bold;
-  color: #333; 
-}
-
+/* Form Row Styling */
 .form-row {
   display: flex;
   justify-content: space-between;
-  gap: 15px;
+  gap: 25px;
+  flex-wrap: wrap; /* Ensures wrapping of items on small screens */
 }
 
+/* Form Group Styling */
+.form-group {
+  flex: 1;
+  text-align: left;
+  min-width: 200px; /* Prevent form inputs from becoming too small */
+  margin-bottom: 15px;
+}
+
+/* Form Label Styling */
+.form-group label {
+  font-weight: bold;
+  color: #555;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+/* Form Input Styling */
 .form-group input {
-  width: 48%;
-  padding: 10px;
-  margin-top: 5px;
+  width: 100%; /* Ensure inputs span the full width of their container */
+  padding: 12px;
   border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-bottom: 5px;
+  transition: border-color 0.3s ease;
 }
 
+/* Focused Input Styling */
+.form-group input:focus {
+  border-color: #0056b3;
+  outline: none;
+}
+
+/* Error Message Styling */
 .error-message {
   color: red;
   font-size: 12px;
+  margin-top: 5px;
 }
 
+/* Submit Button Styling */
 .btn {
-  width: 200px; 
+  width: 200px;
   padding: 12px;
   background-color: #0056b3;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   color: white;
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-
-  display: block; 
-  margin: 0 auto; 
+  margin-top: 20px;
 }
 
 .btn:disabled {
@@ -64,25 +90,112 @@ h2 {
   background-color: #007bff;
 }
 
+/* Table Styling */
 .table {
-  color: #000;
-  margin-top: 20px;
+  cursor: pointer;
   width: 100%;
+  margin-top: 30px;
   border-collapse: collapse;
 }
 
 .table th,
 .table td {
-  padding: 10px;
-  text-align: left;
-  border-bottom: 1px solid #000;
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  font-size: 14px;
 }
 
-.alert {
-  margin-top: 20px;
+.table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+.table td {
   font-size: 14px;
-  padding: 10px;
-  background-color: #f8d7da;
-  color: #721c24;
-  border-radius: 4px;
+}
+
+.table td button {
+  background-color: #28a745;
+  border-radius: 6px;
+  padding: 8px 16px;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.table td button:hover {
+  background-color: #218838;
+}
+
+/* Error Message Styling */
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 20px;
+}
+
+/* Responsive Design for Mobile */
+@media (max-width: 768px) {
+  /* Form Row Styling */
+  .form-row {
+    flex-direction: column; /* Stack form fields vertically */
+    align-items: center;
+  }
+
+  /* Form Group Styling */
+  .form-group {
+    width: 100%;
+    margin-bottom: 20px; /* Space between form groups */
+  }
+
+  /* Button Styling */
+  .btn {
+    width: 100%; /* Full width button */
+  }
+
+  /* Table Header and Cells Styling */
+  .table th,
+  .table td {
+    font-size: 12px; /* Smaller text size for mobile */
+    padding: 10px;
+  }
+
+  /* Card Layout (for Available Trains) */
+  .train-cards {
+    flex-direction: column; /* Stack train cards vertically */
+    align-items: center;
+  }
+
+  /* Train Card Styling */
+  .train-card {
+    width: 90%; /* Reduce card width on smaller screens */
+    margin-bottom: 20px;
+  }
+}
+
+/* Large Screens (above 768px) */
+@media (min-width: 769px) {
+  /* Table Styling */
+  .table {
+    margin-top: 30px;
+    width: 100%;
+  }
+
+  /* Table Cell Padding */
+  .table th,
+  .table td {
+    padding: 15px;
+    font-size: 14px;
+  }
+
+  /* Flexbox for Form Row */
+  .form-row {
+    display: flex;
+    justify-content: space-between;
+  }
 }
