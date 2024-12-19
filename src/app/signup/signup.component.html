@@ -12,7 +12,6 @@
         <div class="loader"></div>
       </div>
 
-      <!-- First Name -->
       <div class="form-group">
         <label for="first_name">First Name</label>
         <input
@@ -33,7 +32,6 @@
         </span>
       </div>
 
-      <!-- Last Name -->
       <div class="form-group">
         <label for="last_name">Last Name</label>
         <input
@@ -53,7 +51,6 @@
         </span>
       </div>
 
-      <!-- Gender and Date of Birth -->
       <div class="form-group-inline">
         <div class="gender-container">
           <label for="gender">Gender</label>
@@ -99,7 +96,6 @@
         </div>
       </div>
 
-      <!-- Email -->
       <div class="form-group">
         <label for="email">Email</label>
         <input
@@ -121,7 +117,6 @@
         </span>
       </div>
 
-      <!-- Password -->
       <div class="form-group">
         <label for="password">Password</label>
         <input
@@ -152,7 +147,6 @@
         </span>
       </div>
 
-      <!-- Mobile -->
       <div class="form-group">
         <label for="mobile">Mobile</label>
         <input
@@ -191,7 +185,6 @@
     </form>
   </div>
 
-  <!-- OTP Section -->
   <div *ngIf="otpSent && !otpVerified" class="otp-section">
     <form [formGroup]="otpForm" (ngSubmit)="onVerifyOTP()" class="otp-form">
       <div class="form-group">
@@ -218,7 +211,6 @@
     </form>
   </div>
 
-  <!-- OTP Success Message -->
   <div *ngIf="otpVerified" class="otp-success">
     <p>OTP verified successfully! You can now proceed to your account.</p>
   </div>

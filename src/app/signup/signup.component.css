@@ -189,7 +189,7 @@ label {
   margin-bottom: 20px;
   color: rgb(4, 76, 157);
 }
-.header h2{
+.header h2 {
   font-size: 28px;
 }
 .otp-form {
@@ -229,12 +229,12 @@ label {
 
 @keyframes hangingMovement {
   0% {
-    transform: translateY(0); /* Start at normal position */
+    transform: translateY(0); 
   }
   50% {
-    transform: translateY(10px); /* Move slightly down */
+    transform: translateY(10px);
   }
   100% {
-    transform: translateY(0); /* Return to normal position */
+    transform: translateY(0); 
   }
 }

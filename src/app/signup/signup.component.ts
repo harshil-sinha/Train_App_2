@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
-
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -56,7 +56,7 @@ export class SignupComponent {
 
       this.userEmail = signupData.email;
 
-      this.http.post('http://localhost:4000/api/signup', signupData).subscribe({
+      this.http.post(`${environment.apiBaseUrl}/signup`, signupData).subscribe({
         next: (response) => {
           Swal.fire({
             title: 'Success!',

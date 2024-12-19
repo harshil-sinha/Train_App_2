@@ -96,9 +96,9 @@
   font-weight: 600;
   transition: background-color 0.3s;
   margin-top: 40px;
-  width: 30%; /* Adjust width if needed */
-  margin-left: auto; /* This centers the button */
-  margin-right: auto; /* This centers the button */
+  width: 30%;
+  margin-left: auto; 
+  margin-right: auto;
 }
 
 .btn:hover {

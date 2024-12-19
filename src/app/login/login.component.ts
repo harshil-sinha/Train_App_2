@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import Swal from 'sweetalert2';
+// import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -35,18 +36,11 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       this.isLoading = true;
       const loginData = this.loginForm.getRawValue();
-      this.http.post('http://localhost:4000/api/login', loginData).subscribe({
+      this.http.post(`${environment.apiBaseUrl}/login`, loginData).subscribe({
         next: (response) => {
-          Swal.fire({
-            title: 'Success!',
-            text: 'You have logged in successfully.',
-            icon: 'success',
-            confirmButtonText: 'OK',
-          }).then(() => {
-            this.loginForm.reset();
-            this.router.navigate(['/search']);
-          });
-          this.isLoading = false; 
+          this.loginForm.reset();
+          this.router.navigate(['/search']);
+          this.isLoading = false;
         },
         error: (error) => {
           if (error.status === 401) {

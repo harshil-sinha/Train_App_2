@@ -1,6 +1,8 @@
 <div class="train-search-container">
-  <h2>Search Trains</h2>
-
+  <h2>Train Ticket Booking</h2>
+  <div *ngIf="isLoading" class="loader-container">
+    <div class="loader"></div>
+  </div>
   <form [formGroup]="trainSearchForm" (ngSubmit)="onSubmit()">
     <div class="form-row">
       <div class="form-group">
@@ -11,6 +13,7 @@
           formControlName="from"
           class="form-control"
           placeholder="Enter departure station name"
+          required
         />
         <div
           *ngIf="
@@ -31,6 +34,7 @@
           formControlName="to"
           class="form-control"
           placeholder="Enter destination station name"
+          required
         />
         <div
           *ngIf="

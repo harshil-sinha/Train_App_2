@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import Swal from 'sweetalert2';
+import { environment } from 'src/environments/environment';
 
 interface Train {
   train_name: string;
@@ -27,11 +28,12 @@ export class TrainSearchComponent {
   trainSearchForm: FormGroup;
   trains: Train[] = [];
   errorMessage: string = '';
+  isLoading: boolean = false;
 
   constructor(private fb: FormBuilder, private http: HttpClient) {
     this.trainSearchForm = this.fb.group({
-      from: ['', [Validators.required]],
-      to: ['', [Validators.required]],
+      from: [''],
+      to: [''],
     });
   }
 
@@ -39,10 +41,11 @@ export class TrainSearchComponent {
 
   onSubmit(): void {
     if (this.trainSearchForm.valid) {
+      this.isLoading = true;
       const { from, to } = this.trainSearchForm.value;
 
       this.http
-        .post<TrainSearchResponse>('http://localhost:4000/api/search', {
+        .post<TrainSearchResponse>(`${environment.apiBaseUrl}/search`, {
           from,
           to,
         })
@@ -67,6 +70,7 @@ export class TrainSearchComponent {
                 confirmButtonText: 'OK',
               });
             }
+            this.isLoading = false;
           },
           error: (error) => {
             console.error('Error occurred while searching for trains:', error);
@@ -78,6 +82,7 @@ export class TrainSearchComponent {
               icon: 'error',
               confirmButtonText: 'OK',
             });
+            this.isLoading = false;
           },
         });
     } else {
