@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import { environment } from 'src/environments/environment';
@@ -30,14 +30,16 @@ export class TrainSearchComponent {
   errorMessage: string = '';
   isLoading: boolean = false;
 
+  // New variables to hold the last searched values
+  searchedFrom: string = '';
+  searchedTo: string = '';
+
   constructor(private fb: FormBuilder, private http: HttpClient) {
     this.trainSearchForm = this.fb.group({
       from: [''],
       to: [''],
     });
   }
-
-  ngOnInit(): void {}
 
   onSubmit(): void {
     if (this.trainSearchForm.valid) {
@@ -51,18 +53,17 @@ export class TrainSearchComponent {
         })
         .subscribe({
           next: (response) => {
+            this.isLoading = false;
             if (response.success) {
               this.trains = response.data;
               this.errorMessage = '';
-              // Swal.fire({
-              //   title: 'Success!',
-              //   text: 'Trains found successfully.',
-              //   icon: 'success',
-              //   confirmButtonText: 'OK',
-              // });
+
+              // Update the last searched values
+              this.searchedFrom = from;
+              this.searchedTo = to;
             } else {
-              this.errorMessage = response.message;
               this.trains = [];
+              this.errorMessage = response.message;
               Swal.fire({
                 title: 'No trains found!',
                 text: response.message,
@@ -70,19 +71,17 @@ export class TrainSearchComponent {
                 confirmButtonText: 'OK',
               });
             }
-            this.isLoading = false;
           },
           error: (error) => {
-            console.error('Error occurred while searching for trains:', error);
-            this.errorMessage = 'An error occurred while searching for trains.';
+            this.isLoading = false;
             this.trains = [];
+            this.errorMessage = 'An error occurred while searching for trains.';
             Swal.fire({
               title: 'Error!',
               text: 'Unable to fetch train details. Please try again later.',
               icon: 'error',
               confirmButtonText: 'OK',
             });
-            this.isLoading = false;
           },
         });
     } else {

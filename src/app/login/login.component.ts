@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-// import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 @Component({

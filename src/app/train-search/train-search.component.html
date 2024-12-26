@@ -1,87 +1,89 @@
-<div class="train-search-container">
-  <h2>Train Ticket Booking</h2>
+<div class="container">
+  <header class="hero">
+    <div class="hero-content">
+      <h1>Train Ticket Booking</h1>
+      <p>Book your train journeys with ease.</p>
+      <form
+        [formGroup]="trainSearchForm"
+        (ngSubmit)="onSubmit()"
+        class="search-form"
+      >
+        <div class="search-bar">
+          <input
+            type="text"
+            placeholder="From Station"
+            formControlName="from"
+            class="search-input"
+            required
+          />
+          <!-- <span
+            *ngIf="
+              trainSearchForm.controls['from'].invalid &&
+              trainSearchForm.controls['from'].touched
+            "
+            class="error-message"
+          >
+            From station is required.
+          </span> -->
+
+          <input
+            type="text"
+            placeholder="To Station"
+            formControlName="to"
+            class="search-input"
+            required
+          />
+          <!-- <span
+            *ngIf="
+              trainSearchForm.controls['to'].invalid &&
+              trainSearchForm.controls['to'].touched
+            "
+            class="error-message"
+          >
+            To station is required.
+          </span> -->
+
+          <button
+            type="submit"
+            class="search-btn"
+            [disabled]="trainSearchForm.invalid"
+          >
+            Search Trains
+          </button>
+        </div>
+      </form>
+    </div>
+  </header>
+
   <div *ngIf="isLoading" class="loader-container">
     <div class="loader"></div>
   </div>
-  <form [formGroup]="trainSearchForm" (ngSubmit)="onSubmit()">
-    <div class="form-row">
-      <div class="form-group">
-        <label for="from">From Station:</label>
-        <input
-          type="text"
-          id="from"
-          formControlName="from"
-          class="form-control"
-          placeholder="Enter departure station name"
-          required
-        />
-        <div
-          *ngIf="
-            trainSearchForm.controls['from'].invalid &&
-            trainSearchForm.controls['from'].touched
-          "
-          class="error-message"
-        >
-          Please enter a valid station name.
-        </div>
-      </div>
 
-      <div class="form-group">
-        <label for="to">To Station:</label>
-        <input
-          type="text"
-          id="to"
-          formControlName="to"
-          class="form-control"
-          placeholder="Enter destination station name"
-          required
-        />
-        <div
-          *ngIf="
-            trainSearchForm.controls['to'].invalid &&
-            trainSearchForm.controls['to'].touched
-          "
-          class="error-message"
-        >
-          Please enter a valid station name.
-        </div>
-      </div>
-    </div>
-
-    <button
-      type="submit"
-      class="btn btn-primary"
-      [disabled]="trainSearchForm.invalid"
-    >
-      Search Trains
-    </button>
-  </form>
-
-  <div *ngIf="trains.length > 0" class="train-list">
-    <h3>Available Trains</h3>
-    <table class="table">
+  <div *ngIf="trains.length > 0" class="train-results">
+    <h2>Available Trains</h2>
+    <p class="train-count">
+      There are {{ trains.length }} trains between {{ searchedFrom }} and
+      {{ searchedTo }}.
+    </p>
+    <table class="train-table">
       <thead>
         <tr>
           <th>Train Name</th>
-          <th>Train Number</th>
-          <th>Arrival Time</th>
-          <th>Departure Time</th>
+          <th>Train No.</th>
+          <th>Arrival</th>
+          <th>Departure</th>
           <th>Fare</th>
-          <th>Travel Time</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let train of trains">
+        <tr *ngFor="let train of trains" class="train-row">
           <td>{{ train.train_name }}</td>
           <td>{{ train.train_number }}</td>
           <td>{{ train.arrival_time }}</td>
           <td>{{ train.departure_time }}</td>
-          <td>{{ train.fare }}</td>
-          <td>{{ train.travel_time.hours }} hours</td>
-          <td>
-            <button class="btn btn-success">Book Now</button>
-          </td>
+          <td>₹{{ train.fare }}</td>
+          <td><button class="btn-book">Book Now</button></td>
         </tr>
       </tbody>
     </table>
