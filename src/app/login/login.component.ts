@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -36,7 +37,9 @@ export class LoginComponent {
       this.isLoading = true;
       const loginData = this.loginForm.getRawValue();
       this.http.post(`${environment.apiBaseUrl}/login`, loginData).subscribe({
-        next: (response) => {
+        next: (response: any) => {
+          // Save user details in localStorage
+          localStorage.setItem('userEmail', loginData.email);
           this.loginForm.reset();
           this.router.navigate(['/search']);
           this.isLoading = false;
@@ -46,22 +49,9 @@ export class LoginComponent {
             this.passwordError = true;
           }
           console.error('Login error:', error);
-          // Swal.fire({
-          //   title: 'Error!',
-          //   text: 'Login failed.',
-          //   icon: 'error',
-          //   confirmButtonText: 'OK',
-          // });
           this.isLoading = false;
         },
       });
-    } else {
-      // Swal.fire({
-      //   title: 'Validation Error!',
-      //   text: 'Please fill in all required fields correctly.',
-      //   icon: 'warning',
-      //   confirmButtonText: 'OK',
-      // });
     }
   }
 }

@@ -58,6 +58,7 @@ export class SignupComponent {
 
       this.http.post(`${environment.apiBaseUrl}/signup`, signupData).subscribe({
         next: (response) => {
+          
           Swal.fire({
             title: 'Success!',
             text: 'Signup successful. Please check your email for OTP.',
